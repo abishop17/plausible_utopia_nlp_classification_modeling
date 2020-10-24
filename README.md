@@ -82,7 +82,7 @@ A system of upvoting / downvoting by users increases / decreases (respectively) 
 
 ## EDA
 
-![
+![sentiment](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/sentiment.png)
 
 
 ```python
