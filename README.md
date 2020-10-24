@@ -56,11 +56,11 @@ A system of upvoting / downvoting by users increases / decreases (respectively) 
 | :-: | :-: |
 |**title**|Subreddit post title|
 |**ups**|Net number of upvotes for post
-|**upvote_ratio**|Proportion of votes
+|**upvote_ratio**|Proportion of upvotes
 |**id**|User id who posted|
 |**url**|URL of the linked article|
 |**body**|The body text of the post|
-|**permalink**|The URL route (starts with r/futurology or r/science)
+|**permalink**|The URL route (starts with `r/futurology` or `r/science`)
 |**subreddit**|The subreddit (***target column***)
 |**submission_type**|The subreddit submission type (`new`, `controversial` and `top`)
 |**title_word_count**|Word count in post title
@@ -98,7 +98,7 @@ Tasks included:
 
 I searched for unigrams (single words) and bigrams (pairs of words) and excluded English stop words along with the stemmed word `ha`.  A meaningless `ha` showed up in the vocabulary (probably for the words 'has', 'have', etc.). I'd prefer to ignore that.
 
-After vectorizing, the shape of the dataframe was 2 rows (for the two classes) by 50,232 columns.
+After vectorizing and creating a document-term matrix, the shape of the dataframe was 2 rows (for the two classes) by 50,232 columns.
 
 ## EDA
 
@@ -106,10 +106,56 @@ After vectorizing, the shape of the dataframe was 2 rows (for the two classes) b
 
 I used this analysis to find the top common words, see below:
 
-### Document-term matrix
+![top_words](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/top_words.png)
+
+![top_words_science_only](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/top_words_science_only.png)
+
+![top_words_futurology_only](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/top_words_futurology_only.png)
 
 ### Sentiment analysis using [VADER (Valence Aware Dictionary and sEntiment Reasoner)](https://pypi.org/project/vaderSentiment/)
 
 * I expected the `futurology` subreddit to have more emotionally charged language (highly positive or negative) than `science`. It turns out both sets of vocabulary are overwhelmingly neutral. This tells me there are more similarities in the tone of the language used, and also that sentiment is not an appropriate feature to include for modeling.
 
 ![sentiment](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/sentiment.png)
+
+## Modeling and Results
+
+**The features I used consisted of the entire set of vectorized text.**
+
+The best performing model was logistic regression. Below is the confusion matrix associated with the predictions.
+![confusion_matrix_logreg](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/confusion_matrix_logreg.png)
+
+**Below are details on the models and their results:**
+
+| Model # | Accuracy (test) | Accuracy (train) |      Estimator      |  Estimator hyperparameters |   Transformer   | Transformer hyperparameters (best) |
+|:-------:|:---------------:|:----------------------:|:-------------------:|:--------------------------:|:---------------:|:----------------------------------:|
+|    1    |      83.5%      |          99.6%         | Logistic Regression |           Default          | CountVectorizer |            max_df = 0.4            |
+|    1    |                 |                        |                     |                            |                 |        max_features = 6_000        |
+|    1    |                 |                        |                     |                            |                 |             min_df = 1             |
+|    1    |                 |                        |                     |                            |                 |        ngram_range = (1, 2)        |
+|    1    |                 |                        |                     |                            |                 |       stop_words = 'english'       |
+|    2    |      83.5%      |          99.6%         | Logistic Regression |       penalty = 'l2'       | CountVectorizer |           Same as model 1          |
+|    2    |                 |                        |                     |            C = 1           |                 |                                    |
+|    3    |      83.7%      |          99.6%         | Logistic Regression |       penalty = 'l2'       | CountVectorizer |           Same as model 1          |
+|    3    |                 |                        |                     |            C = 1           |                 |                                    |
+|    3    |                 |                        |                     |    'solver': 'liblinear'   |                 |                                    |
+|    4    |      82.7%      |           1.0          |    Random Forest    |    'rf__max_depth': None   | CountVectorizer |             max_df=0.75            |
+|    4    |                 |                        |                     | 'rf__max_features': 'auto' |                 |          max_features=5_000         |
+|    4    |                 |                        |                     |   'rf__n_estimators': 100  |                 |          'cvec__min_df': 1         |
+
+
+## Conclusions
+
+**Holding all else constant, the effect of the feature `studi` is a 1.9 times evidence that we can predict classes accurately using vocabulary.** `studi` is the stemmed word, so this conclusion can be extended to words like ‘studies’, ‘study’, ‘studied’.
+
+![log_reg_coefficients](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/log_reg_coefficients.jpg)
+
+With an overall accuracy score (on test data) of 83.7%, there is plenty of room for improvement, with I would tackle with the next steps below.
+
+## Next steps
+
+**Experiment with:**
+
+* Feature engineering
+* Boosting models 
+* Topic modeling
