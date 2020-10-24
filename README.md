@@ -118,13 +118,21 @@ I used this analysis to find the top common words, see below:
 
 ![sentiment](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/sentiment.png)
 
+## Metrics
+
+* 50.2% is the baseline accuracy percentage we compare with the model's accuracy.
+
+* If the model does better than the baseline, then it is better than null model (predicting the majority class).
+
+* I chose accuracy because I wanted the model to be feature-agnostic; I just wanted to maximize correct predictions.
+
 ## Modeling and Results
 
-**The features I used consisted of the entire set of vectorized text.**
+* The features I used consisted of the entire set of vectorized text.
 
-I chose to work with logistic regression and Random Forest because I prioritized interpretability of results. With logistic regression, the ridge regularization selected (after GridSearch) took care of the correlation among the word vectors. With Random Forest, I hoped to reduce variance and decorrelate the word vectors.
+* I chose to work with logistic regression and Random Forest because I prioritized interpretability of results. With logistic regression, the ridge regularization selected (after GridSearch) took care of the correlation among the word vectors. With Random Forest, I hoped to reduce variance and decorrelate the word vectors.
 
-The best performing model was logistic regression. Below is the confusion matrix associated with the predictions.
+* The best performing model was logistic regression, which achieved an accuracy score of 83.7% (an improvement over the baseline). Below is the confusion matrix associated with the predictions.
 ![confusion_matrix_logreg](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/confusion_matrix_logreg.png)
 
 **Below are details on the models and their results:**
