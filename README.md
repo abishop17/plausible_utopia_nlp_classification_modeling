@@ -154,7 +154,7 @@ The best performing model was logistic regression. Below is the confusion matrix
 
 ![log_reg_coefficients](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/log_reg_coefficients.jpg)
 
-With an overall accuracy score (on test data) of 83.7%, there is plenty of room for improvement, with I would tackle with the next steps below.
+With an overall accuracy score (on test data) of 83.7%, there is plenty of room for improvement, which I would tackle with the next steps below.
 
 ## Next steps
 
