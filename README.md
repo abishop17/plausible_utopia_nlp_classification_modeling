@@ -122,6 +122,8 @@ I used this analysis to find the top common words, see below:
 
 **The features I used consisted of the entire set of vectorized text.**
 
+I chose to work with logistic regression and Random Forest because I prioritized interpretability of results. With logistic regression, the ridge regularization selected (after GridSearch) took care of the correlation among the word vectors. With Random Forest, I hoped to reduce variance and decorrelate the word vectors.
+
 The best performing model was logistic regression. Below is the confusion matrix associated with the predictions.
 ![confusion_matrix_logreg](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/confusion_matrix_logreg.png)
 
