@@ -129,22 +129,24 @@ The best performing model was logistic regression. Below is the confusion matrix
 
 **Below are details on the models and their results:**
 
-| Model # | Accuracy (test) | Accuracy (train) |      Estimator      |  Estimator hyperparameters |   Transformer   | Transformer hyperparameters (best) |
-|:-------:|:---------------:|:----------------------:|:-------------------:|:--------------------------:|:---------------:|:----------------------------------:|
-|    1    |      83.5%      |          99.6%         | Logistic Regression |           Default          | CountVectorizer |            max_df = 0.4            |
-|    1    |                 |                        |                     |                            |                 |        max_features = 6_000        |
-|    1    |                 |                        |                     |                            |                 |             min_df = 1             |
-|    1    |                 |                        |                     |                            |                 |        ngram_range = (1, 2)        |
-|    1    |                 |                        |                     |                            |                 |       stop_words = 'english'       |
-|    2    |      83.5%      |          99.6%         | Logistic Regression |       penalty = 'l2'       | CountVectorizer |           Same as model 1          |
-|    2    |                 |                        |                     |            C = 1           |                 |                                    |
-|    3    |      83.7%      |          99.6%         | Logistic Regression |       penalty = 'l2'       | CountVectorizer |           Same as model 1          |
-|    3    |                 |                        |                     |            C = 1           |                 |                                    |
-|    3    |                 |                        |                     |    'solver': 'liblinear'   |                 |                                    |
-|    4    |      82.7%      |           1.0          |    Random Forest    |    'rf__max_depth': None   | CountVectorizer |             max_df=0.75            |
-|    4    |                 |                        |                     | 'rf__max_features': 'auto' |                 |          max_features=5_000         |
-|    4    |                 |                        |                     |   'rf__n_estimators': 100  |                 |          'cvec__min_df': 1         |
-
+| Model # | Accuracy (test) | Accuracy (train) |  GridSearch?  |      Estimator      |  Estimator hyperparameters |   Transformer   | Transformer hyperparameters (best) |
+|:-------:|:---------------:|:----------------:|:-------------:|:-------------------:|:--------------------------:|:---------------:|:----------------------------------:|
+|    1    |      83.5%      |       99.6%      |       N       | Logistic Regression |           Default          | CountVectorizer |            max_df = 0.4            |
+|    1    |                 |                  |               |                     |                            |                 |        max_features = 6_000        |
+|    1    |                 |                  |               |                     |                            |                 |             min_df = 1             |
+|    1    |                 |                  |               |                     |                            |                 |        ngram_range = (1, 2)        |
+|    1    |                 |                  |               |                     |                            |                 |       stop_words = 'english'       |
+|    2    |      83.5%      |       99.6%      | Y: C, penalty | Logistic Regression |       penalty = 'l2'       | CountVectorizer |           Same as model 1          |
+|    2    |                 |                  |               |                     |            C = 1           |                 |                                    |
+|    3    |      83.7%      |       99.6%      | Y: C, penalty | Logistic Regression |       penalty = 'l2'       | CountVectorizer |           Same as model 1          |
+|    3    |                 |                  |               |                     |            C = 1           |                 |                                    |
+|    3    |                 |                  |               |                     |    'solver': 'liblinear'   |                 |                                    |
+|    4    |      82.1%      |        1.0       |  Y (see code) |    Random Forest    |    'rf__max_depth': None   | CountVectorizer |             max_df=0.75            |
+|    4    |                 |                  |               |                     | 'rf__max_features': 'auto' |                 |         max_features=5_000         |
+|    4    |                 |                  |               |                     |   'rf__n_estimators': 100  |                 |              min_df=1              |
+|    4    |                 |                  |               |                     |                            |                 |        ngram_range = (1, 1)        |
+|    4    |                 |                  |               |                     |                            |                 |              min_df: 1             |
+|    4    |                 |                  |               |                     |                            |                 |       stop_words = 'english'       |
 
 ## Conclusions
 
