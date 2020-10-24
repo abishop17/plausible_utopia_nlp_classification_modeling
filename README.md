@@ -55,6 +55,8 @@ A system of upvoting / downvoting by users increases / decreases (respectively) 
 |Column name| Description |
 | :-: | :-: |
 |**title**|Subreddit post title|
+|**ups**|Net number of upvotes for post
+|**upvote_ratio**|Proportion of votes
 |**id**|User id who posted|
 |**url**|URL of the linked article|
 |**body**|The body text of the post|
@@ -69,37 +71,45 @@ A system of upvoting / downvoting by users increases / decreases (respectively) 
 
 **Handling of nulls**: The `body` column in the raw dataframe included 4,544 nulls (about 97% of rows). I decided to drop this column because of the low value of such an insubstantial proportion of `body` text.
 
-**Other preprocessing included**:
+**Other cleaning tasks included**:
 * Remove punctuation
 
+* Remove digits and any elements other than words with RegexpTokenizer
+
+* Stem words with PorterStemmer 
 
 * Drop the `controversial` `submission_type`: The balance of `submission_type` classes was basically even between `new` and `top`, and `controversial` was tiny.
 
+* Drop the `score` column: Duplicate of `ups`
 
 * Add `title_word_count` column for EDA purposes
 
+* Binarize the target feature: `1` for Science, `0` for Futurology
 
+## Preprocessing
+
+Tasks included:
+
+**Use CountVectorizer to do the following:**
+
+1. Count number of times a token is observed in a given subreddit post
+
+2. Create a vector to store those counts
+
+I searched for unigrams (single words) and bigrams (pairs of words) and excluded English stop words along with the stemmed word `ha`.  A meaningless `ha` showed up in the vocabulary (probably for the words 'has', 'have', etc.). I'd prefer to ignore that.
+
+After vectorizing, the shape of the dataframe was 2 rows (for the two classes) by 50,232 columns.
 
 ## EDA
 
+### Bag of Words analysis
+
+I used this analysis to find the top common words, see below:
+
+### Document-term matrix
+
+### Sentiment analysis using [VADER (Valence Aware Dictionary and sEntiment Reasoner)](https://pypi.org/project/vaderSentiment/)
+
+* I expected the `futurology` subreddit to have more emotionally charged language (highly positive or negative) than `science`. It turns out both sets of vocabulary are overwhelmingly neutral. This tells me there are more similarities in the tone of the language used, and also that sentiment is not an appropriate feature to include for modeling.
+
 ![sentiment](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/sentiment.png)
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
