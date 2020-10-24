@@ -124,7 +124,7 @@ I used this analysis to find the top common words, see below:
 
 * If the model does better than the baseline, then it is better than null model (predicting the majority class).
 
-* I chose accuracy because I wanted the model to be feature-agnostic; I just wanted to maximize correct predictions.
+* I chose accuracy because I did not prioritize one class over another.
 
 ## Modeling and Results
 
