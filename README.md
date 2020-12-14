@@ -1,6 +1,6 @@
 # README
 
-# Project 3: Plausible Utopia
+# Plausible Utopia
 ## Classification Modeling on Subreddits to Classify Scientists and Futurists
 
 ### General Assembly Data Science Immersive Coursework, Fall 2020
