@@ -1,7 +1,9 @@
 # README
-## Project 3: Plausible Utopia
 
-### Classification Modeling on Subreddits to Classify Scientists and Futurists
+# Project 3: Plausible Utopia
+## Classification Modeling on Subreddits to Classify Scientists and Futurists
+
+### General Assembly Data Science Immersive Coursework, Fall 2020
 
 ## Problem statement
 
@@ -106,17 +108,17 @@ After vectorizing and creating a document-term matrix, the shape of the datafram
 
 I used this analysis to find the top common words, see below:
 
-![top_words](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/top_words.png)
+![top_words](https://github.com/abishop17/plausible_utopia_nlp_classification_modeling/blob/main/images/top_words.png)
 
-![top_words_science_only](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/top_words_science_only.png)
+![top_words_science_only](https://github.com/abishop17/plausible_utopia_nlp_classification_modeling/blob/main/images/top_words_science_only.png)
 
-![top_words_futurology_only](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/top_words_futurology_only.png)
+![top_words_futurology_only](https://github.com/abishop17/plausible_utopia_nlp_classification_modeling/blob/main/images/top_words_futurology_only.png)
 
 ### Sentiment analysis using [VADER (Valence Aware Dictionary and sEntiment Reasoner)](https://pypi.org/project/vaderSentiment/)
 
 * I expected the `futurology` subreddit to have more emotionally charged language (highly positive or negative) than `science`. It turns out both sets of vocabulary are overwhelmingly neutral. This tells me there are more similarities in the tone of the language used, and also that sentiment is not an appropriate feature to include for modeling.
 
-![sentiment](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/sentiment.png)
+![sentiment](https://github.com/abishop17/plausible_utopia_nlp_classification_modeling/blob/main/images/sentiment.png)
 
 ## Metrics
 
@@ -133,7 +135,7 @@ I used this analysis to find the top common words, see below:
 * I chose to work with logistic regression and Random Forest because I prioritized interpretability of results. With logistic regression, the ridge regularization selected (after GridSearch) took care of the correlation among the word vectors. With Random Forest, I hoped to reduce variance and decorrelate the word vectors.
 
 * The best performing model was logistic regression, which achieved an accuracy score of 83.7% (an improvement over the baseline). Below is the confusion matrix associated with the predictions.
-![confusion_matrix_logreg](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/confusion_matrix_logreg.png)
+![confusion_matrix_logreg](https://github.com/abishop17/plausible_utopia_nlp_classification_modeling/blob/main/images/confusion_matrix_logreg.png)
 
 **Below are details on the models and their results:**
 
@@ -160,7 +162,7 @@ I used this analysis to find the top common words, see below:
 
 **Holding all else constant, the effect of the feature `studi` is a 1.9 times evidence that we can predict classes accurately using vocabulary.** `studi` is the stemmed word, so this conclusion can be extended to words like ‘studies’, ‘study’, ‘studied’.
 
-![log_reg_coefficients](https://git.generalassemb.ly/abishop17/project_3/blob/master/images/log_reg_coefficients.jpg)
+![log_reg_coefficients](https://github.com/abishop17/plausible_utopia_nlp_classification_modeling/blob/main/images/log_reg_coefficients.jpg)
 
 With an overall accuracy score (on test data) of 83.7%, there is plenty of room for improvement, which I would tackle with the next steps below.
 
