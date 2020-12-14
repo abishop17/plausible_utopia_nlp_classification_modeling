@@ -135,6 +135,7 @@ I used this analysis to find the top common words, see below:
 * I chose to work with logistic regression and Random Forest because I prioritized interpretability of results. With logistic regression, the ridge regularization selected (after GridSearch) took care of the correlation among the word vectors. With Random Forest, I hoped to reduce variance and decorrelate the word vectors.
 
 * The best performing model was logistic regression, which achieved an accuracy score of 83.7% (an improvement over the baseline). Below is the confusion matrix associated with the predictions.
+
 ![confusion_matrix_logreg](https://github.com/abishop17/plausible_utopia_nlp_classification_modeling/blob/main/images/confusion_matrix_logreg.png)
 
 **Below are details on the models and their results:**
